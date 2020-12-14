@@ -2,7 +2,6 @@ def display(board = [0, 0, 0, 0, 0, 0, 0, 0, 0]):
     t = ['-', 'X', 'O']
     print(
 '''
-
 {} {} {}
 {} {} {}
 {} {} {}'''.format(t[board[0]], t[board[1]], t[board[2]], t[board[3]], t[board[4]], t[board[5]], t[board[6]], t[board[7]], t[board[8]]))

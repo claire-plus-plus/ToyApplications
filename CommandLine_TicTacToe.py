@@ -4,7 +4,9 @@ def display(board = [0, 0, 0, 0, 0, 0, 0, 0, 0]):
 '''
 {} {} {}
 {} {} {}
-{} {} {}'''.format(t[board[0]], t[board[1]], t[board[2]], t[board[3]], t[board[4]], t[board[5]], t[board[6]], t[board[7]], t[board[8]]))
+{} {} {}'''.format(t[board[0]], t[board[1]], t[board[2]],\
+                   t[board[3]], t[board[4]], t[board[5]],\
+                   t[board[6]], t[board[7]], t[board[8]]))
     return
 
 #main program
@@ -38,5 +40,33 @@ while(True):
         else:
             Board[Input] = 2 if player else 1
 
+    win = False
+    for i in range(0, 3):
+        currentPlayer = 2 if player else 1
+        win = win or ((\
+        currentPlayer == Board[i * 3 + 0] and\
+        currentPlayer == Board[i * 3 + 1] and\
+        currentPlayer == Board[i * 3 + 2]\
+        ) or (\
+        currentPlayer == Board[i + 0] and\
+        currentPlayer == Board[i + 3] and\
+        currentPlayer == Board[i + 6]))
+        
+    win = win or ((\
+                  currentPlayer == Board[0] and\
+                  currentPlayer == Board[4] and\
+                  currentPlayer == Board[8]) or (\
+                  currentPlayer == Board[2] and\
+                  currentPlayer == Board[4] and\
+                  currentPlayer == Board[6]))
+    
+    if win:
+        display(Board)
+        input("Player " + ("O" if player else "X") + " wins! Press Enter to escape!")
+        quit()
+    elif sum(Board == 13):
+        input("Draw! Press enter to escape!")
+        quit()
+        
     player = not player
             

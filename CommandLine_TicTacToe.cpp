@@ -1,5 +1,6 @@
 #include <iostream>
 #include <numeric>
+#include <limits>
 #include <array>
 
 void displayBoard(const std::array<uint8_t, 9>& board) {
@@ -37,16 +38,16 @@ int main(void) {
 			std::cout << "Player " << (player ? 'O' : 'X') << ": ";
 			int input;
 			std::cin >> input;
-			std::cin.ignore(INT_MAX, '\n');
+			std::cin.ignore(std::numeric_limits<int>::max(), '\n');
 
 			// Validate input
 			input--;
 			if (input < 0 || input >= 9) {
-				std::cout << "Please enter a number between 1 and 9!\a" << std::endl;
+				std::cout << "Please enter a number between 1 and 9!" << std::endl;
 				retryInput = true;
 			}
 			else if (board[input]) {
-				std::cout << "That space is taken! Choose another space!\a" << std::endl;
+				std::cout << "That space is taken! Choose another space!" << std::endl;
 				retryInput = true;
 			}
 			else board[input] = uint8_t(player) + 1;
@@ -80,7 +81,7 @@ int main(void) {
 		// Display winning text
 		if (win) {
 			displayBoard(board);
-			std::cout << "Player " << (player ? 'O' : 'X') << " Wins! Press Enter to Escape!\a";
+			std::cout << "Player " << (player ? 'O' : 'X') << " Wins! Press Enter to Escape!";
 			while (std::cin.get() != '\n');
 			break;
 		}
@@ -89,7 +90,7 @@ int main(void) {
 		// Display draw text
 		if (std::accumulate(board.begin(), board.end(), 0) == 13) {
 			displayBoard(board);
-			std::cout << "Draw! Press Enter to Escape!\a";
+			std::cout << "Draw! Press Enter to Escape!";
 			while (std::cin.get() != '\n');
 			break;
 		}

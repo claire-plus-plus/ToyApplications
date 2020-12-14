@@ -87,7 +87,7 @@ int main(void) {
 		}
 
 
-		// Check for draw board state
+		// Display draw text
 		if (std::accumulate(board.begin(), board.end(), 0) == 13) {
 			std::cout << std::endl <<
 				t[board[0]] << " " << t[board[1]] << " " << t[board[2]] << std::endl <<

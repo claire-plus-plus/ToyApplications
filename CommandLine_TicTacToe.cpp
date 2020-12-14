@@ -4,7 +4,7 @@
 #include <array>
 
 void displayBoard(const std::array<uint8_t, 9>& board) {
-	char t[] { '-', 'X', 'O' };
+	char t[]{ '-', 'X', 'O' };
 	std::cout << std::endl <<
 		t[board[0]] << " " << t[board[1]] << " " << t[board[2]] << std::endl <<
 		t[board[3]] << " " << t[board[4]] << " " << t[board[5]] << std::endl <<
@@ -20,7 +20,7 @@ int main(void) {
 		"7 8 9" << std::endl;
 
 	// 0 = empty, 1 = X, 2 = O
-	std::array<uint8_t, 9> board {};
+	std::array<uint8_t, 9> board{};
 
 	// false = X, true = O
 	// uint8_t(player) + 1 converts bool (X=0, O=1) to same format as board array (X=1, O=2)
@@ -38,6 +38,7 @@ int main(void) {
 			std::cout << "Player " << (player ? 'O' : 'X') << ": ";
 			int input;
 			std::cin >> input;
+			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<int>::max(), '\n');
 
 			// Validate input
@@ -82,7 +83,7 @@ int main(void) {
 		if (win) {
 			displayBoard(board);
 			std::cout << "Player " << (player ? 'O' : 'X') << " Wins! Press Enter to Escape!";
-			while (std::cin.get() != '\n');
+			std::cin.get();
 			break;
 		}
 
@@ -91,7 +92,7 @@ int main(void) {
 		if (std::accumulate(board.begin(), board.end(), 0) == 13) {
 			displayBoard(board);
 			std::cout << "Draw! Press Enter to Escape!";
-			while (std::cin.get() != '\n');
+			std::cin.get();
 			break;
 		}
 
@@ -100,6 +101,6 @@ int main(void) {
 		player = !player;
 	}
 
-	
+
 	return 0;
 }

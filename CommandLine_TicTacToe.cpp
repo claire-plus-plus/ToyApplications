@@ -1,42 +1,6 @@
 #include <iostream>
 #include <numeric>
 #include <array>
-/* Text stuff
-intro...
-Welcome to Tic Tac Toe!
-
-Enter the number of the place you want to play
-1 2 3
-4 5 6
-7 8 9
-
-Press Enter to Start!
-
-
-while playing...
-- - -
-- - -
-- - -
-Player X: 1
-
-X - -
-- - -
-- - -
-Player O: 5
-
-X - -
-- O -
-- - -
-Player X:
-
-...
-
-X O -
-X O -
-X - -
-Player X wins!
-Enter "R" to replay, or press Enter to escape!
-*/
 
 int main(void) {
 	std::cout <<

@@ -18,10 +18,13 @@ Enter the number of the place you want to play!
 4 5 6
 7 8 9''')
 
+#0 = empty, 1 = X, 2 = O
 Board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+#False = X, True = O
 player = False
 
+#main loop
 while(True):
     display(Board)
 
@@ -29,8 +32,14 @@ while(True):
     while(takeInput):
         takeInput = False
 
-        Input = int(input("Player " + ("O" if player else "X") + ": ")) - 1
+        try:
+            Input = int(input("Player " + ("O" if player else "X") + ": ")) - 1
+        except:
+            print("Please enter a number between 1 and 9!")
+            takeInput = True
+            continue
 
+        #validate input
         if(Input < 0 or Input >= 9):
             print("Please enter a number between 1 and 9!")
             takeInput = True
@@ -40,33 +49,37 @@ while(True):
         else:
             Board[Input] = 2 if player else 1
 
+    #check for winning board state
     win = False
     for i in range(0, 3):
         currentPlayer = 2 if player else 1
         win = win or ((\
-        currentPlayer == Board[i * 3 + 0] and\
-        currentPlayer == Board[i * 3 + 1] and\
-        currentPlayer == Board[i * 3 + 2]\
+            currentPlayer == Board[i * 3 + 0] and\
+            currentPlayer == Board[i * 3 + 1] and\
+            currentPlayer == Board[i * 3 + 2]\
         ) or (\
-        currentPlayer == Board[i + 0] and\
-        currentPlayer == Board[i + 3] and\
-        currentPlayer == Board[i + 6]))
+            currentPlayer == Board[i + 0] and\
+            currentPlayer == Board[i + 3] and\
+            currentPlayer == Board[i + 6]))
         
     win = win or ((\
-                  currentPlayer == Board[0] and\
-                  currentPlayer == Board[4] and\
-                  currentPlayer == Board[8]) or (\
-                  currentPlayer == Board[2] and\
-                  currentPlayer == Board[4] and\
-                  currentPlayer == Board[6]))
-    
+        currentPlayer == Board[0] and\
+        currentPlayer == Board[4] and\
+        currentPlayer == Board[8]\
+    ) or (\
+        currentPlayer == Board[2] and\
+        currentPlayer == Board[4] and\
+        currentPlayer == Board[6]))
+
+    #display winning text
     if win:
         display(Board)
         input("Player " + ("O" if player else "X") + " wins! Press Enter to escape!")
         quit()
-    elif sum(Board == 13):
+    #display draw text
+    elif sum(Board) == 13:
         input("Draw! Press enter to escape!")
         quit()
-        
+
+    #swap player before looping
     player = not player
-            
